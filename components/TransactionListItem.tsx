@@ -1,0 +1,76 @@
+// TransactionListItem.tsx
+import React from "react";
+import { Text, StyleSheet, View, Pressable } from "react-native";
+import { Transaction } from "../types/TransactionType";
+
+interface TransactionListItemProps {
+  transaction: Transaction;
+  onPress: () => void;
+}
+
+const TransactionListItem: React.FC<TransactionListItemProps> = ({
+  transaction,
+  onPress,
+}) => {
+  const { amount, date, description, type } = transaction;
+
+  return (
+    <Pressable
+      style={({ pressed }) => [styles.container, pressed && styles.pressed]}
+      onPress={onPress}
+    >
+      <View style={styles.transactionInfoContainer}>
+        <Text style={styles.dateText}>{date}</Text>
+        <Text style={styles.descriptionText}>{description}</Text>
+      </View>
+
+      <View style={styles.amountContainer}>
+        <Text style={styles.typeText}>{type.toUpperCase()}</Text>
+        <Text style={styles.amountText}>RM{amount.toFixed(2)}</Text>
+      </View>
+    </Pressable>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    marginHorizontal: 16,
+    marginTop: 12,
+    padding: 16,
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  pressed: {
+    opacity: 0.7,
+    backgroundColor: "#f0f0f0",
+  },
+  transactionInfoContainer: {
+    maxWidth: "70%",
+  },
+  dateText: {
+    fontSize: 14,
+    color: "#666",
+    marginBottom: 6,
+  },
+  descriptionText: {
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  amountContainer: {
+    alignItems: "flex-end",
+    maxWidth: "30%",
+  },
+  amountText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  typeText: {
+    fontSize: 12,
+    marginTop: 4,
+    marginBottom: 6,
+  },
+});
+
+export default TransactionListItem;

@@ -1,0 +1,247 @@
+[
+  {
+    "id": 1,
+    "amount": 1250.0,
+    "date": "10-04-2025",
+    "description": "Monthly Salary Deposit",
+    "type": "credit"
+  },
+  {
+    "id": 2,
+    "amount": 85.75,
+    "date": "11-04-2025",
+    "description": "Grocery Store Purchase",
+    "type": "debit"
+  },
+  {
+    "id": 3,
+    "amount": 9.99,
+    "date": "12-04-2025",
+    "description": "Streaming Service Subscription",
+    "type": "debit"
+  },
+  {
+    "id": 4,
+    "amount": 42.5,
+    "date": "12-04-2025",
+    "description": "Restaurant Dinner",
+    "type": "debit"
+  },
+  {
+    "id": 5,
+    "amount": 750.0,
+    "date": "15-04-2025",
+    "description": "Monthly Rent Payment",
+    "type": "debit"
+  },
+  {
+    "id": 6,
+    "amount": 60.0,
+    "date": "15-04-2025",
+    "description": "Fuel Purchase",
+    "type": "debit"
+  },
+  {
+    "id": 7,
+    "amount": 120.5,
+    "date": "16-04-2025",
+    "description": "Internet Service Bill",
+    "type": "debit"
+  },
+  {
+    "id": 8,
+    "amount": 200.0,
+    "date": "17-04-2025",
+    "description": "Cash Withdrawal",
+    "type": "debit"
+  },
+  {
+    "id": 9,
+    "amount": 15.0,
+    "date": "17-04-2025",
+    "description": "Movie Tickets",
+    "type": "debit"
+  },
+  {
+    "id": 10,
+    "amount": 350.75,
+    "date": "18-04-2025",
+    "description": "Freelance Design Work",
+    "type": "credit"
+  },
+  {
+    "id": 11,
+    "amount": 32.99,
+    "date": "18-04-2025",
+    "description": "Online Purchase - Books",
+    "type": "debit"
+  },
+  {
+    "id": 12,
+    "amount": 79.95,
+    "date": "19-04-2025",
+    "description": "Gym Membership",
+    "type": "debit"
+  },
+  {
+    "id": 13,
+    "amount": 24.5,
+    "date": "19-04-2025",
+    "description": "Lunch with Colleagues",
+    "type": "debit"
+  },
+  {
+    "id": 14,
+    "amount": 180.0,
+    "date": "20-04-2025",
+    "description": "Electricity Bill",
+    "type": "debit"
+  },
+  {
+    "id": 15,
+    "amount": 45.99,
+    "date": "20-04-2025",
+    "description": "Clothing Purchase",
+    "type": "debit"
+  },
+  {
+    "id": 16,
+    "amount": 55.0,
+    "date": "21-04-2025",
+    "description": "Hair Salon",
+    "type": "debit"
+  },
+  {
+    "id": 17,
+    "amount": 150.0,
+    "date": "21-04-2025",
+    "description": "Gift From Family",
+    "type": "credit"
+  },
+  {
+    "id": 18,
+    "amount": 12.99,
+    "date": "22-04-2025",
+    "description": "Coffee Shop",
+    "type": "debit"
+  },
+  {
+    "id": 19,
+    "amount": 89.99,
+    "date": "22-04-2025",
+    "description": "Mobile Phone Bill",
+    "type": "debit"
+  },
+  {
+    "id": 20,
+    "amount": 32.5,
+    "date": "22-04-2025",
+    "description": "Pharmacy Purchase",
+    "type": "debit"
+  },
+  {
+    "id": 21,
+    "amount": 400.0,
+    "date": "23-04-2025",
+    "description": "Car Insurance Payment",
+    "type": "debit"
+  },
+  {
+    "id": 22,
+    "amount": 18.5,
+    "date": "23-04-2025",
+    "description": "Fast Food Purchase",
+    "type": "debit"
+  },
+  {
+    "id": 23,
+    "amount": 53.75,
+    "date": "23-04-2025",
+    "description": "Home Improvement Store",
+    "type": "debit"
+  },
+  {
+    "id": 24,
+    "amount": 250.0,
+    "date": "24-04-2025",
+    "description": "Rebate Payment",
+    "type": "credit"
+  },
+  {
+    "id": 25,
+    "amount": 75.25,
+    "date": "24-04-2025",
+    "description": "Pet Supplies",
+    "type": "debit"
+  },
+  {
+    "id": 26,
+    "amount": 22.99,
+    "date": "24-04-2025",
+    "description": "Online Streaming Movie Rental",
+    "type": "debit"
+  },
+  {
+    "id": 27,
+    "amount": 65.0,
+    "date": "25-04-2025",
+    "description": "Ride Share Service",
+    "type": "debit"
+  },
+  {
+    "id": 28,
+    "amount": 1200.0,
+    "date": "25-04-2025",
+    "description": "Bonus Payment",
+    "type": "credit"
+  },
+  {
+    "id": 29,
+    "amount": 19.99,
+    "date": "25-04-2025",
+    "description": "Music Subscription",
+    "type": "debit"
+  },
+  {
+    "id": 30,
+    "amount": 45.0,
+    "date": "26-04-2025",
+    "description": "Dry Cleaning",
+    "type": "debit"
+  },
+  {
+    "id": 31,
+    "amount": 128.75,
+    "date": "26-04-2025",
+    "description": "Department Store Purchase",
+    "type": "debit"
+  },
+  {
+    "id": 32,
+    "amount": 38.5,
+    "date": "26-04-2025",
+    "description": "Dinner Takeout",
+    "type": "debit"
+  },
+  {
+    "id": 33,
+    "amount": 500.0,
+    "date": "27-04-2025",
+    "description": "Student Loan Payment",
+    "type": "debit"
+  },
+  {
+    "id": 34,
+    "amount": 95.0,
+    "date": "27-04-2025",
+    "description": "Dental Appointment",
+    "type": "debit"
+  },
+  {
+    "id": 35,
+    "amount": 225.0,
+    "date": "27-04-2025",
+    "description": "Online Course Payment",
+    "type": "debit"
+  }
+]
