@@ -7,3 +7,9 @@ export interface Transaction {
   description: string;
   type: TransactionType;
 }
+
+export interface TransactionListItemProps {
+  transaction: Transaction;
+  masked: boolean;
+  onPress: () => void;
+}

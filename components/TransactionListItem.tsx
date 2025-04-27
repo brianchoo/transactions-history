@@ -1,16 +1,12 @@
 // TransactionListItem.tsx
 import React from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
-import { Transaction } from "../types/TransactionType";
-
-interface TransactionListItemProps {
-  transaction: Transaction;
-  onPress: () => void;
-}
+import { TransactionListItemProps } from "../types/TransactionType";
 
 const TransactionListItem: React.FC<TransactionListItemProps> = ({
   transaction,
   onPress,
+  masked,
 }) => {
   const { amount, date, description, type } = transaction;
 
@@ -26,7 +22,9 @@ const TransactionListItem: React.FC<TransactionListItemProps> = ({
 
       <View style={styles.amountContainer}>
         <Text style={styles.typeText}>{type.toUpperCase()}</Text>
-        <Text style={styles.amountText}>RM{amount.toFixed(2)}</Text>
+        <Text style={styles.amountText}>
+          {masked ? "RM******" : `RM${amount.toFixed(2)}`}
+        </Text>
       </View>
     </Pressable>
   );

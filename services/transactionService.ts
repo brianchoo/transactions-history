@@ -5,7 +5,11 @@ export const fetchTransactions = async (): Promise<void> => {
       // 20% chance to fail
       const isFail = Math.random() < 0.2;
       if (isFail) {
-        reject(new Error("Fail to load transactions"));
+        reject(
+          new Error(
+            "Fail to load transactions. Refresh the page again to load transactions."
+          )
+        );
       } else {
         resolve();
       }

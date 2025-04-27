@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Entypo from "@expo/vector-icons/Entypo";
+import Feather from "@expo/vector-icons/Feather";
 import {
   View,
   FlatList,
@@ -6,10 +8,10 @@ import {
   StyleSheet,
   ActivityIndicator,
   RefreshControl,
+  Pressable,
 } from "react-native";
 import TransactionListItem from "./TransactionListItem";
 import { Transaction } from "../types/TransactionType";
-import transactionsData from "../data/transaction-data.json";
 import { useTransactions } from "../hooks/useTransactions";
 
 const TransactionList: React.FC = () => {
@@ -22,9 +24,7 @@ const TransactionList: React.FC = () => {
     loadTransactions,
   } = useTransactions();
 
-  useEffect(() => {
-    loadTransactions();
-  }, []);
+  const [masked, setMasked] = useState<boolean>(true);
 
   const handleTransactionPress = (transaction: Transaction): void => {
     console.log("Transaction pressed:", transaction);
@@ -34,6 +34,15 @@ const TransactionList: React.FC = () => {
   const onRefresh = async () => {
     await refreshTransactions();
   };
+
+  const handleMasked = () => {
+    console.log("masked clicked");
+    setMasked(!masked);
+  };
+
+  useEffect(() => {
+    loadTransactions();
+  }, []);
 
   if (loading) {
     return (
@@ -52,12 +61,20 @@ const TransactionList: React.FC = () => {
           <Text style={styles.errorText}>Error: {error}</Text>
         </View>
       )}
+      <Pressable style={styles.maskedIcon} onPress={handleMasked}>
+        {masked ? (
+          <Entypo name="eye" size={24} color="black" />
+        ) : (
+          <Feather name="eye-off" size={24} color="black" />
+        )}
+      </Pressable>
       <FlatList
         data={transactions}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TransactionListItem
             transaction={item}
+            masked={masked}
             onPress={() => handleTransactionPress(item)}
           />
         )}
@@ -90,6 +107,10 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 10,
     fontSize: 16,
+  },
+  maskedIcon: {
+    alignItems: "flex-end",
+    padding: 20,
   },
 });
 
