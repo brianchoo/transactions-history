@@ -1,11 +1,9 @@
-// TransactionListItem.tsx
 import React from "react";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { TransactionListItemProps } from "../types/TransactionType";
 
 const TransactionListItem: React.FC<TransactionListItemProps> = ({
   transaction,
-  onPress,
   masked,
 }) => {
   const { amount, date, description, type } = transaction;
@@ -13,7 +11,6 @@ const TransactionListItem: React.FC<TransactionListItemProps> = ({
   return (
     <Pressable
       style={({ pressed }) => [styles.container, pressed && styles.pressed]}
-      onPress={onPress}
     >
       <View style={styles.transactionInfoContainer}>
         <Text style={styles.dateText}>{date}</Text>

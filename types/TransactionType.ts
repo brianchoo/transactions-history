@@ -1,3 +1,5 @@
+import { ListRenderItem, RefreshControlProps } from "react-native";
+
 export type TransactionType = "credit" | "debit" | string;
 
 export interface Transaction {
@@ -8,8 +10,18 @@ export interface Transaction {
   type: TransactionType;
 }
 
+export interface TransactionListProps {
+  transactions: Transaction[];
+  refreshing: boolean;
+  masked: boolean;
+  error?: string;
+  onRefresh: () => Promise<void>;
+  // keyExtractor?: (item: Transaction, index: number) => string;
+  // renderItem?: ListRenderItem<Transaction>;
+  // refreshControl?: React.ReactElement<RefreshControlProps>;
+}
+
 export interface TransactionListItemProps {
   transaction: Transaction;
   masked: boolean;
-  onPress: () => void;
 }
