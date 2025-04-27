@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Text, StyleSheet, View, Pressable } from "react-native";
 import { TransactionListItemProps } from "../types/TransactionType";
 
@@ -7,10 +8,20 @@ const TransactionListItem: React.FC<TransactionListItemProps> = ({
   masked,
 }) => {
   const { amount, date, description, type } = transaction;
+  const navigation = useNavigation<any>();
 
   return (
     <Pressable
       style={({ pressed }) => [styles.container, pressed && styles.pressed]}
+      onPress={() =>
+        navigation.navigate("TransactionDetail", {
+          transactionId: transaction.id,
+          transactionAmount: transaction.amount,
+          transactionDescription: transaction.description,
+          transactionDate: transaction.date,
+          transactionType: transaction.type,
+        })
+      }
     >
       <View style={styles.transactionInfoContainer}>
         <Text style={styles.dateText}>{date}</Text>

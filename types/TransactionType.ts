@@ -16,12 +16,16 @@ export interface TransactionListProps {
   masked: boolean;
   error?: string;
   onRefresh: () => Promise<void>;
-  // keyExtractor?: (item: Transaction, index: number) => string;
-  // renderItem?: ListRenderItem<Transaction>;
-  // refreshControl?: React.ReactElement<RefreshControlProps>;
 }
-
 export interface TransactionListItemProps {
   transaction: Transaction;
   masked: boolean;
 }
+
+export type TransactionDetailParams = {
+  transactionId: number;
+  transactionAmount: number;
+  transactionDescription: string;
+  transactionDate: string;
+  transactionType: string;
+};

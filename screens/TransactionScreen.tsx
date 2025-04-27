@@ -47,7 +47,6 @@ const TransactionScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Transaction History</Text>
       {error && (
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>Error: {error}</Text>
