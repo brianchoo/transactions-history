@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TransactionScreen from "./screens/TransactionScreen";
 import TransactionDetailScreen from "./screens/TransactionDetailScreen";
+import MaskedContextProvider from "./context/masked-context";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,18 +14,20 @@ export default function App() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <StatusBar style="dark" />
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="TransactionsHistory"
-              component={TransactionScreen}
-            />
-            <Stack.Screen
-              name="TransactionDetail"
-              component={TransactionDetailScreen}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <MaskedContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="TransactionsHistory"
+                component={TransactionScreen}
+              />
+              <Stack.Screen
+                name="TransactionDetail"
+                component={TransactionDetailScreen}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MaskedContextProvider>
       </SafeAreaView>
     </SafeAreaProvider>
   );

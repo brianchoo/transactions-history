@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { TransactionDetailParams } from "../types/TransactionType";
+import { MaskedContext } from "../context/masked-context";
 
 const TransactionDetailScreen: React.FC = () => {
+  const { masked } = useContext(MaskedContext);
   const route = useRoute<RouteProp<{ params: TransactionDetailParams }>>();
   const {
     transactionId,
@@ -14,7 +17,10 @@ const TransactionDetailScreen: React.FC = () => {
 
   const transactionDetails = [
     { label: "ID", value: transactionId },
-    { label: "Amount", value: `RM${Number(transactionAmount).toFixed(2)}` },
+    {
+      label: "Amount",
+      value: masked ? "RM******" : `RM${Number(transactionAmount).toFixed(2)}`,
+    },
     { label: "Description", value: transactionDescription },
     { label: "Date", value: transactionDate },
     { label: "Type", value: transactionType?.toUpperCase() },

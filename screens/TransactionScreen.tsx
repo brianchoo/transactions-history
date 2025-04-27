@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import {
@@ -10,9 +10,10 @@ import {
 } from "react-native";
 import TransactionList from "../components/TransactionList";
 import { useTransactions } from "../hooks/useTransactions";
+import { MaskedContext } from "../context/masked-context";
 
 const TransactionScreen: React.FC = () => {
-  const [masked, setMasked] = useState<boolean>(true);
+  const { masked, toggleMasked } = useContext(MaskedContext);
   const {
     transactions,
     loading,
@@ -25,11 +26,6 @@ const TransactionScreen: React.FC = () => {
   // Handle refresh action
   const onRefresh = async () => {
     await refreshTransactions();
-  };
-
-  const handleMasked = () => {
-    console.log("masked clicked");
-    setMasked(!masked);
   };
 
   useEffect(() => {
@@ -52,7 +48,7 @@ const TransactionScreen: React.FC = () => {
           <Text style={styles.errorText}>Error: {error}</Text>
         </View>
       )}
-      <Pressable style={styles.maskedIcon} onPress={handleMasked}>
+      <Pressable style={styles.maskedIcon} onPress={toggleMasked}>
         {masked ? (
           <Entypo name="eye" size={24} color="black" />
         ) : (
