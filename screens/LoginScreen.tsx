@@ -1,19 +1,16 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import {
   View,
   Text,
-  TextInput,
   StyleSheet,
   Platform,
-  Pressable,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from "react-native";
-import Entypo from "@expo/vector-icons/Entypo";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { useLogin } from "../hooks/useLogin";
+import LoginForm from "../components/login/LoginForm";
+import LoginButtons from "../components/login/LoginButtons";
 
 const LoginScreen: React.FC = () => {
   const {
@@ -29,13 +26,6 @@ const LoginScreen: React.FC = () => {
     closeLoginField,
   } = useLogin();
 
-  const BiometricIcon = (): ReactElement =>
-    Platform.OS === "ios" ? (
-      <MaterialCommunityIcons name="face-recognition" size={24} color="black" />
-    ) : (
-      <Entypo name="fingerprint" size={24} color="black" />
-    );
-
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -45,67 +35,22 @@ const LoginScreen: React.FC = () => {
         <View style={styles.formContainer}>
           <Text style={styles.loginLabel}>Please Log In</Text>
           {!showCredentialFields && (
-            <View style={styles.inputContainer}>
-              <Pressable
-                style={({ pressed }) => [
-                  styles.loginButton,
-                  pressed && { backgroundColor: "#f0f0f0" },
-                ]}
-                onPress={toggleLoginFields}
-              >
-                <View>
-                  <Text style={styles.loginButtonText}>
-                    Login with Password
-                  </Text>
-                </View>
-              </Pressable>
-              <Pressable
-                style={({ pressed }) => [
-                  styles.loginButton,
-                  pressed && { backgroundColor: "#f0f0f0" }, // light grey on press
-                ]}
-                onPress={handleBiometricAuth}
-              >
-                <View>
-                  <BiometricIcon />
-                </View>
-              </Pressable>
-            </View>
+            <LoginButtons
+              toggleLoginFields={toggleLoginFields}
+              handleBiometricAuth={handleBiometricAuth}
+            />
           )}
 
           {showCredentialFields && (
-            <View style={styles.credentialsContainer}>
-              <Pressable style={styles.closeButton} onPress={closeLoginField}>
-                <AntDesign name="close" size={24} color="black" />
-              </Pressable>
-              <TextInput
-                style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-              />
-              {errorMessage ? (
-                <Text style={styles.errorText}>{errorMessage}</Text>
-              ) : null}
-              <Pressable
-                style={[
-                  styles.submitButton,
-                  (!username || !password) && styles.disabledButton,
-                ]}
-                onPress={handleLogin}
-                disabled={!username || !password}
-              >
-                <Text style={styles.submitButtonText}>Login</Text>
-              </Pressable>
-            </View>
+            <LoginForm
+              username={username}
+              password={password}
+              errorMessage={errorMessage}
+              setUsername={setUsername}
+              setPassword={setPassword}
+              handleLogin={handleLogin}
+              closeLoginField={closeLoginField}
+            />
           )}
         </View>
       </TouchableWithoutFeedback>

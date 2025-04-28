@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   Pressable,
 } from "react-native";
-import TransactionList from "../components/TransactionList";
+import TransactionList from "../components/transaction/TransactionList";
 import { useTransactions } from "../hooks/useTransactions";
 import { MaskedContext } from "../context/masked-context";
 

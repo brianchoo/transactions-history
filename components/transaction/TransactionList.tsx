@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, StyleSheet, RefreshControl } from "react-native";
-import TransactionListItem from "./TransactionListItem";
-import { TransactionListProps } from "../types/TransactionType";
+import TransactionListItem from "../transaction/TransactionListItem";
+import { TransactionListProps } from "../../types/TransactionType";
 
 const TransactionList: React.FC<TransactionListProps> = ({
   transactions,

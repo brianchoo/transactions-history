@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Text, StyleSheet, View, Pressable } from "react-native";
-import { TransactionListItemProps } from "../types/TransactionType";
+import { TransactionListItemProps } from "../../types/TransactionType";
 
 const TransactionListItem: React.FC<TransactionListItemProps> = ({
   transaction,
