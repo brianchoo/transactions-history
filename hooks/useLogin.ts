@@ -71,7 +71,7 @@ export const useLogin = (): UseLoginProps => {
 
   const handleLogin = (): void => {
     if (username === TEST_USERNAME && password === TEST_PASSWORD) {
-      setErrorMessage("");
+      resetFields();
       navigation.navigate("TransactionsHistory" as never);
     } else {
       setErrorMessage("Invalid username or password");
