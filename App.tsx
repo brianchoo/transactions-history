@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TransactionScreen from "./screens/TransactionScreen";
 import TransactionDetailScreen from "./screens/TransactionDetailScreen";
+import LoginScreen from "./screens/LoginScreen";
 import MaskedContextProvider from "./context/masked-context";
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,11 @@ export default function App() {
         <MaskedContextProvider>
           <NavigationContainer>
             <Stack.Navigator>
+              <Stack.Screen
+                name="LoginScreen"
+                component={LoginScreen}
+                options={{ headerShown: false }}
+              />
               <Stack.Screen
                 name="TransactionsHistory"
                 component={TransactionScreen}

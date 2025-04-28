@@ -13,9 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.brian2012.transactionshistory",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.brian2012.transactionshistory",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -24,8 +30,11 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-asset"
-    ]
+    "plugins": ["expo-asset"],
+    "extra": {
+      "eas": {
+        "projectId": "f689a1c6-2edd-45bf-8127-df994ea300b2"
+      }
+    }
   }
 }
