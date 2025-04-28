@@ -16,7 +16,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.brian2012.transactionshistory",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSFaceIDUsageDescription": "This app uses Face ID to verify"
       }
     },
     "android": {

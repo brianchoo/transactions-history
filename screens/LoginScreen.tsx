@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import {
   View,
   Text,
@@ -9,109 +9,25 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Alert,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import * as LocalAuthentication from "expo-local-authentication";
-import { useNavigation } from "@react-navigation/native";
-
-// Preset credentials for testing
-const TEST_USERNAME: string = "user";
-const TEST_PASSWORD: string = "user";
+import { useLogin } from "../hooks/useLogin";
 
 const LoginScreen: React.FC = () => {
-  const [showCredentialFields, setShowCredentialFields] =
-    useState<boolean>(false);
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-
-  const navigation = useNavigation();
-
-  const fallBacktoDefaultAuth = () => {
-    setShowCredentialFields(true);
-  };
-
-  const alertComponent = (title, message, btnText, btnFunc) => {
-    return Alert.alert(title, message, [{ text: btnText, onPress: btnFunc }]);
-  };
-
-  const TwoButtonAlert = () => {
-    Alert.alert("You are logged in", "You can now check your transactions", [
-      {
-        text: "Back",
-        onPress: () => console.log("Cancel Pressed"),
-      },
-      {
-        text: "Proceed",
-        onPress: () => navigation.navigate("TransactionsHistory"),
-      },
-    ]);
-  };
-
-  const handleBiometricAuth = async () => {
-    const isBiometricAvailable = await LocalAuthentication.hasHardwareAsync();
-    console.log(isBiometricAvailable, "isBiometricAvailable");
-
-    if (!isBiometricAvailable) {
-      return alertComponent(
-        "Please enter your password",
-        "Biometric not supported",
-        "OK",
-        () => fallBacktoDefaultAuth()
-      );
-    }
-
-    let supportedBiometrics;
-    if (isBiometricAvailable) {
-      supportedBiometrics =
-        await LocalAuthentication.supportedAuthenticationTypesAsync();
-    }
-
-    const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
-    if (!savedBiometrics) {
-      return alertComponent(
-        "Biometric record not found",
-        "Please login with your password",
-        "OK",
-        () => fallBacktoDefaultAuth()
-      );
-    }
-
-    const biometricAuth = await LocalAuthentication.authenticateAsync({
-      promptMessage: "Logged In",
-      cancelLabel: "Cancel",
-      disableDeviceFallback: true,
-    });
-
-    if (biometricAuth) {
-      TwoButtonAlert();
-    }
-  };
-
-  useEffect(() => {
-    async () => {
-      const compatible = await LocalAuthentication.hasHardwareAsync();
-      setIsBiometricSupported(compatible);
-    };
-  });
-
-  const handleLogin = (): void => {
-    if (username === TEST_USERNAME && password === TEST_PASSWORD) {
-      setErrorMessage("");
-      navigation.navigate("TransactionsHistory");
-    } else {
-      setErrorMessage("Invalid username or password");
-    }
-  };
-
-  const toggleLoginFields = (): void => {
-    setShowCredentialFields(!showCredentialFields);
-    setErrorMessage("");
-  };
+  const {
+    showCredentialFields,
+    username,
+    password,
+    errorMessage,
+    setUsername,
+    setPassword,
+    handleBiometricAuth,
+    handleLogin,
+    toggleLoginFields,
+    closeLoginField,
+  } = useLogin();
 
   const BiometricIcon = (): ReactElement =>
     Platform.OS === "ios" ? (
@@ -159,7 +75,7 @@ const LoginScreen: React.FC = () => {
 
           {showCredentialFields && (
             <View style={styles.credentialsContainer}>
-              <Pressable style={styles.closeButton} onPress={toggleLoginFields}>
+              <Pressable style={styles.closeButton} onPress={closeLoginField}>
                 <AntDesign name="close" size={24} color="black" />
               </Pressable>
               <TextInput
