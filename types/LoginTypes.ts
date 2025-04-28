@@ -11,5 +11,4 @@ export interface UseLoginProps {
   toggleLoginFields: () => void;
   closeLoginField: () => void;
   resetFields: () => void;
-  getBiometricIconName: () => string;
 }

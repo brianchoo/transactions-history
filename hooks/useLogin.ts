@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import * as LocalAuthentication from "expo-local-authentication";
-import { Alert, Platform } from "react-native";
+import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TEST_USERNAME, TEST_PASSWORD } from "../constants/credentials";
 import { UseLoginProps } from "../types/LoginTypes";
+import {
+  showSuccessAlert,
+  showBiometricNotSupportedAlert,
+  showNoBiometricsAlert,
+} from "../utils/alert";
 
 export const useLogin = (): UseLoginProps => {
   const [showCredentialFields, setShowCredentialFields] =
@@ -30,54 +35,21 @@ export const useLogin = (): UseLoginProps => {
     setShowCredentialFields(true);
   };
 
-  const alertComponent = (
-    title: string,
-    message: string,
-    btnText: string,
-    btnFunc: () => void
-  ) => {
-    return Alert.alert(title, message, [{ text: btnText, onPress: btnFunc }]);
-  };
-
-  const showSuccessAlert = () => {
-    Alert.alert("You are logged in", "You can now check your transactions", [
-      {
-        text: "Back",
-        onPress: () => console.log("Cancel Pressed"),
-      },
-      {
-        text: "Proceed",
-        onPress: () => navigation.navigate("TransactionsHistory" as never),
-      },
-    ]);
-  };
-
   const handleBiometricAuth = async () => {
     if (!isBiometricSupported) {
-      return alertComponent(
-        "Please enter your password",
-        "Biometric not supported",
-        "OK",
-        () => fallBackToDefaultLogin()
-      );
+      return showBiometricNotSupportedAlert(fallBackToDefaultLogin);
     }
 
     // Check if biometrics are supported and which ones
     if (isBiometricSupported) {
       const supportedBiometrics =
         await LocalAuthentication.supportedAuthenticationTypesAsync();
-      console.log("Supported biometrics:", supportedBiometrics);
     }
 
     // Check if the user has saved biometrics
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
     if (!savedBiometrics) {
-      return alertComponent(
-        "Biometric record not found",
-        "Please login with your password",
-        "OK",
-        () => fallBackToDefaultLogin()
-      );
+      return showNoBiometricsAlert(fallBackToDefaultLogin);
     }
 
     // Authenticate with biometrics
@@ -88,7 +60,10 @@ export const useLogin = (): UseLoginProps => {
     });
 
     if (biometricAuth) {
-      showSuccessAlert();
+      showSuccessAlert(
+        () => console.log("Cancel Pressed"),
+        () => navigation.navigate("TransactionsHistory" as never)
+      );
     }
   };
 
@@ -117,10 +92,6 @@ export const useLogin = (): UseLoginProps => {
     resetFields();
   };
 
-  const getBiometricIconName = (): string => {
-    return Platform.OS === "ios" ? "face-recognition" : "fingerprint";
-  };
-
   return {
     isBiometricSupported,
     showCredentialFields,
@@ -134,6 +105,5 @@ export const useLogin = (): UseLoginProps => {
     toggleLoginFields,
     closeLoginField,
     resetFields,
-    getBiometricIconName,
   };
 };
