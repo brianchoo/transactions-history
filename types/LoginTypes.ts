@@ -1,6 +1,7 @@
 export interface UseLoginProps {
   isBiometricSupported: boolean;
   showCredentialFields: boolean;
+  isBiometricAuthenticated?: boolean;
   username: string;
   password: string;
   errorMessage: string;

@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TransactionScreen from "./screens/TransactionScreen";
 import TransactionDetailScreen from "./screens/TransactionDetailScreen";
 import LoginScreen from "./screens/LoginScreen";
-import MaskedContextProvider from "./context/masked-context";
+import MaskedContextProvider from "./context/MaskedContext";
 
 const Stack = createNativeStackNavigator();
 

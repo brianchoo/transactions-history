@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import * as LocalAuthentication from "expo-local-authentication";
-import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TEST_USERNAME, TEST_PASSWORD } from "../constants/credentials";
 import { UseLoginProps } from "../types/LoginTypes";
@@ -9,6 +7,7 @@ import {
   showBiometricNotSupportedAlert,
   showNoBiometricsAlert,
 } from "../utils/alert";
+import * as LocalAuthentication from "expo-local-authentication";
 
 export const useLogin = (): UseLoginProps => {
   const [showCredentialFields, setShowCredentialFields] =
@@ -17,6 +16,8 @@ export const useLogin = (): UseLoginProps => {
   const [password, setPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isBiometricSupported, setIsBiometricSupported] = useState(false);
+  const [isBiometricAuthenticated, setIsBiometricAuthenticated] =
+    useState<boolean>(false);
 
   const navigation = useNavigation();
 
@@ -60,6 +61,7 @@ export const useLogin = (): UseLoginProps => {
     });
 
     if (biometricAuth) {
+      setIsBiometricAuthenticated(true);
       showSuccessAlert(
         () => console.log("Cancel Pressed"),
         () => navigation.navigate("TransactionsHistory" as never)
@@ -94,6 +96,7 @@ export const useLogin = (): UseLoginProps => {
 
   return {
     isBiometricSupported,
+    isBiometricAuthenticated,
     showCredentialFields,
     username,
     password,

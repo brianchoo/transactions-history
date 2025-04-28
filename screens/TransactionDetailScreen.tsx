@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { TransactionDetailParams } from "../types/TransactionType";
-import { MaskedContext } from "../context/masked-context";
+import { MaskedContext } from "../context/MaskedContext";
 
 const TransactionDetailScreen: React.FC = () => {
   const { masked } = useContext(MaskedContext);

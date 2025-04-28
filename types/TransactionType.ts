@@ -1,7 +1,4 @@
-import { ListRenderItem, RefreshControlProps } from "react-native";
-
 export type TransactionType = "credit" | "debit" | string;
-
 export interface Transaction {
   id: number;
   amount: number;
@@ -9,7 +6,6 @@ export interface Transaction {
   description: string;
   type: TransactionType;
 }
-
 export interface TransactionListProps {
   transactions: Transaction[];
   refreshing: boolean;

@@ -10,10 +10,12 @@ import {
 } from "react-native";
 import TransactionList from "../components/transaction/TransactionList";
 import { useTransactions } from "../hooks/useTransactions";
-import { MaskedContext } from "../context/masked-context";
+import { MaskedContext } from "../context/MaskedContext";
+import { useLogin } from "../hooks/useLogin";
 
 const TransactionScreen: React.FC = () => {
-  const { masked, toggleMasked } = useContext(MaskedContext);
+  const { masked, toggleMasked, setMasked } = useContext(MaskedContext);
+  const { handleBiometricAuth, isBiometricAuthenticated } = useLogin();
   const {
     transactions,
     loading,
@@ -28,9 +30,20 @@ const TransactionScreen: React.FC = () => {
     await refreshTransactions();
   };
 
+  const handleMaskedState = () => {
+    if (!isBiometricAuthenticated) {
+      return handleBiometricAuth();
+    }
+
+    return toggleMasked();
+  };
+
   useEffect(() => {
     loadTransactions();
-  }, []);
+    if (isBiometricAuthenticated) {
+      setMasked(false);
+    }
+  }, [isBiometricAuthenticated]);
 
   if (loading) {
     return (
@@ -48,7 +61,7 @@ const TransactionScreen: React.FC = () => {
           <Text style={styles.errorText}>Error: {error}</Text>
         </View>
       )}
-      <Pressable style={styles.maskedIcon} onPress={toggleMasked}>
+      <Pressable style={styles.maskedIcon} onPress={handleMaskedState}>
         {masked ? (
           <Entypo name="eye" size={24} color="black" />
         ) : (
