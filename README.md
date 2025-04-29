@@ -30,6 +30,10 @@ Follow these instructions to set up and run the project on your local machine.
 5. **Switch to Expo mode**  
    After starting the project, press `s` in the terminal to switch to Expo mode.
 
+6. **Login Credentials**  
+   Username: user  
+   Password: user
+
 ---
 
 ## Running the App
